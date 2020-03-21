@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: service,dao
+  application:
+    name: cas-live
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    #time-zone: GMT+8
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
+
+logging:
+  level:
+    # dao 开启 debug 模式 mybatis 输入 sql
+    com.ysx.cas.dao: debug
+  config: classpath:logback-spring-dev.xml
