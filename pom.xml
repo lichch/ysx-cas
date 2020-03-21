@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- 基本信息 -->
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <name>ysx-cas</name>
+    <description>新授权系统cas</description>
+
+    <!-- 项目说明：这里作为聚合工程的父工程 -->
+    <groupId>com.ysx</groupId>
+    <artifactId>ysx-cas</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <!-- 继承说明：这里继承SpringBoot提供的父工程 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <!-- 模块说明：这里声明多个子模块 -->
+    <modules>
+        <module>cas-web</module>
+        <module>cas-core</module>
+        <module>cas-api</module>
+    </modules>
+
+    <!-- 环境配置 -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <!-- Default Active Without Assign Parameter -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profileActive>service,dao</profileActive>
+                <loggerActive>classpath:logback-spring-dev.xml</loggerActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>beta</id>
+            <properties>
+                <profileActive>servicebeta,daobeta</profileActive>
+                <loggerActive>classpath:logback-spring-beta.xml</loggerActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>stage</id>
+            <properties>
+                <profileActive>servicestage,daostage</profileActive>
+                <loggerActive>classpath:logback-spring-stage.xml</loggerActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profileActive>serviceprod,daoprod</profileActive>
+                <loggerActive>classpath:logback-spring-prod.xml</loggerActive>
+            </properties>
+        </profile>
+    </profiles>
+
+    <properties>
+        <!-- 配置版本 -->
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- 内部依赖项版本 -->
+        <sso-client.version>1.0-SNAPSHOT</sso-client.version>
+        <cas-api.version>0.0.1-SNAPSHOT</cas-api.version>
+        <cas-core.version>0.0.1-SNAPSHOT</cas-core.version>
+        <cas-web.version>0.0.1-SNAPSHOT</cas-web.version>
+        <tscp-admin-client.version>1.0.3-SNAPSHOT</tscp-admin-client.version>
+        <!-- 外部依赖项版本 -->
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <lombok.version>1.18.10</lombok.version>
+        <hibernate-validator.version>6.0.16.Final</hibernate-validator.version>
+        <spring-boot-starter-data-redis.version>2.2.2.RELEASE</spring-boot-starter-data-redis.version>
+        <spring-boot-starter-test.version>2.2.2.RELEASE</spring-boot-starter-test.version>
+        <spring-boot-starter-data-redis.version>2.2.3.RELEASE</spring-boot-starter-data-redis.version>
+        <spring-boot-starter.version>2.2.2.RELEASE</spring-boot-starter.version>
+        <pagehelper-spring-boot-starter.version>1.2.13</pagehelper-spring-boot-starter.version>
+        <mybatis-spring-boot-starter.version>2.1.1</mybatis-spring-boot-starter.version>
+        <mysql-connector-java.version>8.0.18</mysql-connector-java.version>
+        <dubbo-spring-boot-starter.version>0.2.0</dubbo-spring-boot-starter.version>
+        <fastjson.version>1.2.61</fastjson.version>
+        <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
+        <easyexcel.version>2.1.6</easyexcel.version>
+        <jsqlparser.version>2.0</jsqlparser.version>
+        <okhttp.version>3.14.6</okhttp.version>
+    </properties>
+
+    <!-- 版本说明：这里统一管理依赖的版本号 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- 内部依赖项版本管理 -->
+            <dependency>
+                <groupId>com.sso</groupId>
+                <artifactId>sso-client</artifactId>
+                <version>${sso-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysx</groupId>
+                <artifactId>tscp-admin-client</artifactId>
+                <version>${tscp-admin-client.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ysx</groupId>
+                <artifactId>cas-api</artifactId>
+                <version>${cas-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysx</groupId>
+                <artifactId>cas-core</artifactId>
+                <version>${cas-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysx</groupId>
+                <artifactId>cas-web</artifactId>
+                <version>${cas-web.version}</version>
+            </dependency>
+            <!-- 外部依赖项版本管理 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot-starter-data-redis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot-starter-test.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot-starter-data-redis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.boot</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax.servlet-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.jsqlparser</groupId>
+                <artifactId>jsqlparser</artifactId>
+                <version>${jsqlparser.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 全局依赖 -->
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!-- 引入依赖，子模块会继承该依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <!-- sso-auth 依赖 -->
+        <dependency>
+            <groupId>com.sso</groupId>
+            <artifactId>sso-client</artifactId>
+        </dependency>
+        <!-- 工具类相关 -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!-- 发布到私服 -->
+    <distributionManagement>
+        <repository>
+            <id>yunshuxie-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://nexus.sys.bandubanxie.com/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>yunshuxie-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://nexus.sys.bandubanxie.com/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- 要将源码放上去，需要加入这个插件 -->
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

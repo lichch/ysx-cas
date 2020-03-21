@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="generate.CrmLiveTeacherGradeDao">
+  <resultMap id="BaseResultMap" type="generate.CrmLiveTeacherGrade">
+    <id column="TEACHER_GRADE_ID" jdbcType="BIGINT" property="teacherGradeId" />
+    <result column="TEACHER_ID" jdbcType="BIGINT" property="teacherId" />
+    <result column="GRADE" jdbcType="TINYINT" property="grade" />
+    <result column="TEACHER_TYPE" jdbcType="VARCHAR" property="teacherType" />
+    <result column="CREATOR" jdbcType="BIGINT" property="creator" />
+    <result column="CREATE_AT" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="MODIFIER" jdbcType="BIGINT" property="modifier" />
+    <result column="UPDATE_AT" jdbcType="TIMESTAMP" property="updateAt" />
+    <result column="DELETED" jdbcType="TINYINT" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TEACHER_GRADE_ID, TEACHER_ID, GRADE, TEACHER_TYPE, CREATOR, CREATE_AT, MODIFIER, 
+    UPDATE_AT, DELETED
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from crm_live_teacher_grade
+    where TEACHER_GRADE_ID = #{teacherGradeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from crm_live_teacher_grade
+    where TEACHER_GRADE_ID = #{teacherGradeId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="TEACHER_GRADE_ID" keyProperty="teacherGradeId" parameterType="generate.CrmLiveTeacherGrade" useGeneratedKeys="true">
+    insert into crm_live_teacher_grade (TEACHER_ID, GRADE, TEACHER_TYPE, 
+      CREATOR, CREATE_AT, MODIFIER, 
+      UPDATE_AT, DELETED)
+    values (#{teacherId,jdbcType=BIGINT}, #{grade,jdbcType=TINYINT}, #{teacherType,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=BIGINT}, #{createAt,jdbcType=TIMESTAMP}, #{modifier,jdbcType=BIGINT}, 
+      #{updateAt,jdbcType=TIMESTAMP}, #{deleted,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="TEACHER_GRADE_ID" keyProperty="teacherGradeId" parameterType="generate.CrmLiveTeacherGrade" useGeneratedKeys="true">
+    insert into crm_live_teacher_grade
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teacherId != null">
+        TEACHER_ID,
+      </if>
+      <if test="grade != null">
+        GRADE,
+      </if>
+      <if test="teacherType != null">
+        TEACHER_TYPE,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createAt != null">
+        CREATE_AT,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="updateAt != null">
+        UPDATE_AT,
+      </if>
+      <if test="deleted != null">
+        DELETED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=TINYINT},
+      </if>
+      <if test="teacherType != null">
+        #{teacherType,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="generate.CrmLiveTeacherGrade">
+    update crm_live_teacher_grade
+    <set>
+      <if test="teacherId != null">
+        TEACHER_ID = #{teacherId,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null">
+        GRADE = #{grade,jdbcType=TINYINT},
+      </if>
+      <if test="teacherType != null">
+        TEACHER_TYPE = #{teacherType,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null">
+        CREATE_AT = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        MODIFIER = #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        UPDATE_AT = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        DELETED = #{deleted,jdbcType=TINYINT},
+      </if>
+    </set>
+    where TEACHER_GRADE_ID = #{teacherGradeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="generate.CrmLiveTeacherGrade">
+    update crm_live_teacher_grade
+    set TEACHER_ID = #{teacherId,jdbcType=BIGINT},
+      GRADE = #{grade,jdbcType=TINYINT},
+      TEACHER_TYPE = #{teacherType,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=BIGINT},
+      CREATE_AT = #{createAt,jdbcType=TIMESTAMP},
+      MODIFIER = #{modifier,jdbcType=BIGINT},
+      UPDATE_AT = #{updateAt,jdbcType=TIMESTAMP},
+      DELETED = #{deleted,jdbcType=TINYINT}
+    where TEACHER_GRADE_ID = #{teacherGradeId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="generate.CrmLiveInitiatorDao">
+  <resultMap id="BaseResultMap" type="generate.CrmLiveInitiator">
+    <id column="INITIATOR_ID" jdbcType="BIGINT" property="initiatorId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="PHOTO_URL" jdbcType="VARCHAR" property="photoUrl" />
+    <result column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="DEGREE" jdbcType="VARCHAR" property="degree" />
+    <result column="UNIVERSITY" jdbcType="VARCHAR" property="university" />
+    <result column="UNIVERSITY_TYPE" jdbcType="VARCHAR" property="universityType" />
+    <result column="SPECIALTY" jdbcType="VARCHAR" property="specialty" />
+    <result column="CERTIFIED" jdbcType="TINYINT" property="certified" />
+    <result column="CERTIFICATE_NO" jdbcType="VARCHAR" property="certificateNo" />
+    <result column="TEACHING_YEARS" jdbcType="TINYINT" property="teachingYears" />
+    <result column="SELF_INTRO" jdbcType="VARCHAR" property="selfIntro" />
+    <result column="ENABLE" jdbcType="TINYINT" property="enable" />
+    <result column="TEST_ACCOUNT" jdbcType="TINYINT" property="testAccount" />
+    <result column="CREATOR" jdbcType="BIGINT" property="creator" />
+    <result column="CREATE_AT" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="MODIFIER" jdbcType="BIGINT" property="modifier" />
+    <result column="UPDATE_AT" jdbcType="TIMESTAMP" property="updateAt" />
+    <result column="DELETED" jdbcType="TINYINT" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    INITIATOR_ID, `NAME`, PHONE, PHOTO_URL, USER_ID, `DEGREE`, UNIVERSITY, UNIVERSITY_TYPE, 
+    SPECIALTY, CERTIFIED, CERTIFICATE_NO, TEACHING_YEARS, SELF_INTRO, `ENABLE`, TEST_ACCOUNT, 
+    CREATOR, CREATE_AT, MODIFIER, UPDATE_AT, DELETED
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from crm_live_initiator
+    where INITIATOR_ID = #{initiatorId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from crm_live_initiator
+    where INITIATOR_ID = #{initiatorId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="INITIATOR_ID" keyProperty="initiatorId" parameterType="generate.CrmLiveInitiator" useGeneratedKeys="true">
+    insert into crm_live_initiator (`NAME`, PHONE, PHOTO_URL, 
+      USER_ID, `DEGREE`, UNIVERSITY, 
+      UNIVERSITY_TYPE, SPECIALTY, CERTIFIED, 
+      CERTIFICATE_NO, TEACHING_YEARS, SELF_INTRO, 
+      `ENABLE`, TEST_ACCOUNT, CREATOR, 
+      CREATE_AT, MODIFIER, UPDATE_AT, 
+      DELETED)
+    values (#{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{photoUrl,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=BIGINT}, #{degree,jdbcType=VARCHAR}, #{university,jdbcType=VARCHAR}, 
+      #{universityType,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, #{certified,jdbcType=TINYINT}, 
+      #{certificateNo,jdbcType=VARCHAR}, #{teachingYears,jdbcType=TINYINT}, #{selfIntro,jdbcType=VARCHAR}, 
+      #{enable,jdbcType=TINYINT}, #{testAccount,jdbcType=TINYINT}, #{creator,jdbcType=BIGINT}, 
+      #{createAt,jdbcType=TIMESTAMP}, #{modifier,jdbcType=BIGINT}, #{updateAt,jdbcType=TIMESTAMP}, 
+      #{deleted,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="INITIATOR_ID" keyProperty="initiatorId" parameterType="generate.CrmLiveInitiator" useGeneratedKeys="true">
+    insert into crm_live_initiator
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `NAME`,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="photoUrl != null">
+        PHOTO_URL,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="degree != null">
+        `DEGREE`,
+      </if>
+      <if test="university != null">
+        UNIVERSITY,
+      </if>
+      <if test="universityType != null">
+        UNIVERSITY_TYPE,
+      </if>
+      <if test="specialty != null">
+        SPECIALTY,
+      </if>
+      <if test="certified != null">
+        CERTIFIED,
+      </if>
+      <if test="certificateNo != null">
+        CERTIFICATE_NO,
+      </if>
+      <if test="teachingYears != null">
+        TEACHING_YEARS,
+      </if>
+      <if test="selfIntro != null">
+        SELF_INTRO,
+      </if>
+      <if test="enable != null">
+        `ENABLE`,
+      </if>
+      <if test="testAccount != null">
+        TEST_ACCOUNT,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createAt != null">
+        CREATE_AT,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="updateAt != null">
+        UPDATE_AT,
+      </if>
+      <if test="deleted != null">
+        DELETED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="photoUrl != null">
+        #{photoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="university != null">
+        #{university,jdbcType=VARCHAR},
+      </if>
+      <if test="universityType != null">
+        #{universityType,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null">
+        #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="certified != null">
+        #{certified,jdbcType=TINYINT},
+      </if>
+      <if test="certificateNo != null">
+        #{certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="teachingYears != null">
+        #{teachingYears,jdbcType=TINYINT},
+      </if>
+      <if test="selfIntro != null">
+        #{selfIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=TINYINT},
+      </if>
+      <if test="testAccount != null">
+        #{testAccount,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="generate.CrmLiveInitiator">
+    update crm_live_initiator
+    <set>
+      <if test="name != null">
+        `NAME` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="photoUrl != null">
+        PHOTO_URL = #{photoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="degree != null">
+        `DEGREE` = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="university != null">
+        UNIVERSITY = #{university,jdbcType=VARCHAR},
+      </if>
+      <if test="universityType != null">
+        UNIVERSITY_TYPE = #{universityType,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null">
+        SPECIALTY = #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="certified != null">
+        CERTIFIED = #{certified,jdbcType=TINYINT},
+      </if>
+      <if test="certificateNo != null">
+        CERTIFICATE_NO = #{certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="teachingYears != null">
+        TEACHING_YEARS = #{teachingYears,jdbcType=TINYINT},
+      </if>
+      <if test="selfIntro != null">
+        SELF_INTRO = #{selfIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null">
+        `ENABLE` = #{enable,jdbcType=TINYINT},
+      </if>
+      <if test="testAccount != null">
+        TEST_ACCOUNT = #{testAccount,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null">
+        CREATE_AT = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        MODIFIER = #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        UPDATE_AT = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        DELETED = #{deleted,jdbcType=TINYINT},
+      </if>
+    </set>
+    where INITIATOR_ID = #{initiatorId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="generate.CrmLiveInitiator">
+    update crm_live_initiator
+    set `NAME` = #{name,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      PHOTO_URL = #{photoUrl,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=BIGINT},
+      `DEGREE` = #{degree,jdbcType=VARCHAR},
+      UNIVERSITY = #{university,jdbcType=VARCHAR},
+      UNIVERSITY_TYPE = #{universityType,jdbcType=VARCHAR},
+      SPECIALTY = #{specialty,jdbcType=VARCHAR},
+      CERTIFIED = #{certified,jdbcType=TINYINT},
+      CERTIFICATE_NO = #{certificateNo,jdbcType=VARCHAR},
+      TEACHING_YEARS = #{teachingYears,jdbcType=TINYINT},
+      SELF_INTRO = #{selfIntro,jdbcType=VARCHAR},
+      `ENABLE` = #{enable,jdbcType=TINYINT},
+      TEST_ACCOUNT = #{testAccount,jdbcType=TINYINT},
+      CREATOR = #{creator,jdbcType=BIGINT},
+      CREATE_AT = #{createAt,jdbcType=TIMESTAMP},
+      MODIFIER = #{modifier,jdbcType=BIGINT},
+      UPDATE_AT = #{updateAt,jdbcType=TIMESTAMP},
+      DELETED = #{deleted,jdbcType=TINYINT}
+    where INITIATOR_ID = #{initiatorId,jdbcType=BIGINT}
+  </update>
+</mapper>
