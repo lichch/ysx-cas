@@ -1,0 +1,7 @@
+com\ysx\cas\dao\YsxTscpCourseRoleMapper.class
+com\ysx\cas\innerservice\TestInnerService.class
+App.class
+com\ysx\cas\config\datasource\MainDatasourceConfig.class
+com\ysx\cas\innerservice\impl\TestInnerServiceImpl.class
+com\ysx\cas\dao\bean\YsxTscpCourseRoleBean.class
+com\ysx\cas\api\service\impl\TestHelloWordImpl.class
