@@ -1,0 +1,14 @@
+target/
+*.bak
+.project
+*.MF
+*.idea
+.settings
+.classpath
+*.iml
+.DS_Store
+.idea/*
+*.log
+mybatis-generator.xml
+.idea/workspace.xml
+deploy.xml
